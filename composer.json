@@ -1,0 +1,33 @@
+{
+    "name": "ohffs/laravel-ldap",
+    "description": "Basic LDAP auser auth/lookup",
+    "type": "library",
+    "require": {
+        "freedsx/ldap": "^0.1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "billy",
+            "email": "william.allan@glasgow.ac.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ohffs\\Ldap\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ohffs\\Ldap\\LdapServiceProvider"
+            ],
+            "aliases": {
+                "Ldap": "Ohffs\\Ldap\\LdapFacade"
+            }
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0"
+    }
+}
