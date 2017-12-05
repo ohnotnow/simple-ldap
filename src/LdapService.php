@@ -4,7 +4,6 @@ namespace Ohffs\Ldap;
 
 use Ohffs\Ldap\LdapUser;
 use Ohffs\Ldap\LdapConnectionInterface;
-use Ohffs\Ldap\LdapException;
 
 class LdapService
 {

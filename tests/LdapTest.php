@@ -1,5 +1,6 @@
 <?php
 
+use Ohffs\Ldap\LdapUser;
 use Ohffs\Ldap\LdapService;
 use Ohffs\Ldap\LdapException;
 use Ohffs\Ldap\FakeLdapConnection;
@@ -45,6 +46,46 @@ class LdapTest extends \Orchestra\Testbench\TestCase
             return $this->assertTrue(true);
         }
         $this->fail("Expected an LdapException but none was thrown");
+    }
+
+    /** @test */
+    public function can_look_up_a_valid_user()
+    {
+        $connection = new FakeLdapConnection;
+        $ldap = new LdapService($connection);
+
+        $user = $ldap->findUser('validuser');
+
+        $this->assertEquals('validuser', $user->username);
+        $this->assertEquals('validuser@example.com', $user->email);
+        $this->assertEquals('surname', $user->surname);
+        $this->assertEquals('forenames', $user->forenames);
+
+        $this->assertEquals('validuser', $user['username']);
+        $this->assertEquals('validuser@example.com', $user['email']);
+        $this->assertEquals('surname', $user['surname']);
+        $this->assertEquals('forenames', $user['forenames']);
+    }
+
+    /** @test */
+    public function can_convert_an_ldap_user_to_an_array()
+    {
+        $user = new LdapUser([
+            0 => [
+                'dn' => [0 => 'validuser'],
+                'mail' => [0 => 'validuser@example.com'],
+                'sn' => [0 => 'surname'],
+                'givenname' => [0 => 'forenames'],
+            ],
+        ]);
+
+        $array = $user->toArray();
+
+        $this->assertTrue(is_array($array));
+        $this->assertEquals('validuser', $array['username']);
+        $this->assertEquals('validuser@example.com', $array['email']);
+        $this->assertEquals('surname', $array['surname']);
+        $this->assertEquals('forenames', $array['forenames']);
     }
 
     /** @test */
