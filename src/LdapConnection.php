@@ -13,8 +13,6 @@ class LdapConnection implements LdapConnectionInterface
 
     protected $ou;
 
-    protected $bind;
-
     public function __construct(string $server, string $ou)
     {
         $this->ldap = $this->connect($server);
@@ -26,8 +24,7 @@ class LdapConnection implements LdapConnectionInterface
             throw new LdapException("Could not start TLS on ldap binding");
         }
 
-        $this->bind = $this->anonymousBind();
-        if (! $this->bind) {
+        if (!$this->anonymousBind()) {
             throw new LdapException('Could not bind to server');
         }
 
@@ -48,8 +45,7 @@ class LdapConnection implements LdapConnectionInterface
             return false;
         }
 
-        $bind = $this->authenticatedBind($username, $password);
-        if (! $bind) {
+        if (!$this->authenticatedBind($username, $password)) {
             return false;
         }
 
