@@ -50,7 +50,6 @@ class LdapConnection implements LdapConnectionInterface
     {
         $search = ldap_search($this->ldap, $this->ou, "uid={$username}");
         if (ldap_count_entries($this->ldap, $search) != 1) {
-            $this->unbind();
             Log::error("Could not find {$username} in LDAP");
             return false;
         }
