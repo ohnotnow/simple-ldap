@@ -2,9 +2,6 @@
     "name": "ohffs/laravel-ldap",
     "description": "Basic LDAP auser auth/lookup",
     "type": "library",
-    "require": {
-        "freedsx/ldap": "^0.1.0"
-    },
     "license": "MIT",
     "authors": [
         {
