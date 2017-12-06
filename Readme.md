@@ -52,7 +52,15 @@ print $user['email'];
 // 'Jenny@example.com'
 print $user->email;
 // 'Jenny@example.com'
-
+print $user->toArray();
+/*
+[
+     "username" => "jenny123",
+     "email" => "Jenny@example.com",
+     "surname" => "Smith",
+     "forenames" => "Jenny",
+]
+*/
 ```
 
 Or if you want to use the container/DI just typehint on 'Ohffs\Ldap\LdapService':
