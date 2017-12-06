@@ -1,5 +1,5 @@
 {
-    "name": "ohffs/laravel-ldap",
+    "name": "ohffs/simple-laravel-ldap",
     "description": "Basic LDAP auser auth/lookup",
     "type": "library",
     "license": "MIT",
