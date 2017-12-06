@@ -64,6 +64,10 @@ trait LdapLogic
 
         $this->unbind();
 
+        if (!$info) {
+            return false;
+        }
+
         return new LdapUser($info);
     }
 }

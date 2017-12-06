@@ -65,6 +65,16 @@ class LdapTest extends \Orchestra\Testbench\TestCase
     }
 
     /** @test */
+    public function searching_for_an_invalid_user_returns_false()
+    {
+        $connection = new FakeLdapConnection('fake-server', 'fake-ou');
+        $ldap = new LdapService($connection);
+
+        $user = $ldap->findUser('invalid-user');
+
+        $this->assertFalse($user);
+    }
+    /** @test */
     public function can_convert_an_ldap_user_to_an_array()
     {
         $user = new LdapUser([
