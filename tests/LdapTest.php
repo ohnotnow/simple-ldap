@@ -10,7 +10,7 @@ class LdapTest extends \Orchestra\Testbench\TestCase
     /** @test */
     public function can_authenticate_a_user_in_ldap()
     {
-        $connection = new FakeLdapConnection;
+        $connection = new FakeLdapConnection('fake-server', 'fake-ou');
         $ldap = new LdapService($connection);
 
         $this->assertTrue($ldap->authenticate('validuser', 'validpassword'));
@@ -19,7 +19,7 @@ class LdapTest extends \Orchestra\Testbench\TestCase
     /** @test */
     public function a_valid_user_but_wrong_password_doesnt_authenticate()
     {
-        $connection = new FakeLdapConnection;
+        $connection = new FakeLdapConnection('fake-server', 'fake-ou');
         $ldap = new LdapService($connection);
 
         $this->assertFalse($ldap->authenticate('validuser', 'invalidpassword'));
@@ -28,30 +28,27 @@ class LdapTest extends \Orchestra\Testbench\TestCase
     /** @test */
     public function an_invalid_user_doesnt_authenticate()
     {
-        $connection = new FakeLdapConnection;
+        $connection = new FakeLdapConnection('fake-server', 'fake-ou');
         $ldap = new LdapService($connection);
 
         $this->assertFalse($ldap->authenticate('invaliduser', 'invalidpassword'));
     }
 
-    /** @test */
+    /** @test
+     *  @expectedException     \Ohffs\Ldap\LdapException
+    */
     public function if_cannot_connect_to_server_an_exception_is_thrown()
     {
-        $connection = new FakeLdapConnection;
+        $connection = new FakeLdapConnection('down', 'fake-ou');
         $ldap = new LdapService($connection);
 
-        try {
-            $this->assertFalse($ldap->authenticate('serverdown', 'invalidpassword'));
-        } catch (LdapException $e) {
-            return $this->assertTrue(true);
-        }
-        $this->fail("Expected an LdapException but none was thrown");
+        $this->assertTrue($ldap->authenticate('valid-user', 'valid-password'));
     }
 
     /** @test */
     public function can_look_up_a_valid_user()
     {
-        $connection = new FakeLdapConnection;
+        $connection = new FakeLdapConnection('fake-server', 'fake-ou');
         $ldap = new LdapService($connection);
 
         $user = $ldap->findUser('validuser');
@@ -72,7 +69,7 @@ class LdapTest extends \Orchestra\Testbench\TestCase
     {
         $user = new LdapUser([
             0 => [
-                'dn' => [0 => 'validuser'],
+                'uid' => [0 => 'validuser'],
                 'mail' => [0 => 'validuser@example.com'],
                 'sn' => [0 => 'surname'],
                 'givenname' => [0 => 'forenames'],
@@ -88,11 +85,16 @@ class LdapTest extends \Orchestra\Testbench\TestCase
         $this->assertEquals('forenames', $array['forenames']);
     }
 
-    /** @test */
-    public function can_use_the_facade()
-    {
-        $this->assertTrue(\Ldap::authenticate('validuser', 'validpassword'));
-    }
+    // public function test_can_use_the_facade_to_authenticate_a_user()
+    // {
+    //     config(['ldap.server' => 'real-server.domain.com', "ldap.ou" => 'org-unit',]);
+    //     $this->assertTrue(\Ldap::authenticate('valid-user', 'valid-password'));
+    // }
+
+    // public function test_can_use_the_facade_to_look_up_a_user()
+    // {
+    //     $this->assertTrue(\Ldap::findUser('valid-user'));
+    // }
 
     protected function getPackageProviders($app)
     {

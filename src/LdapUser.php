@@ -13,7 +13,7 @@ class LdapUser implements \ArrayAccess
     protected $forenames;
 
     protected $validKeys = [
-        'dn' => 'username',
+        'uid' => 'username',
         'mail' => 'email',
         'sn' => 'surname',
         'givenname' => 'forenames'
