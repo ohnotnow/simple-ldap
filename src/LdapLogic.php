@@ -44,8 +44,6 @@ trait LdapLogic
             return false;
         }
 
-        $this->unbind();
-
         return true;
     }
 
@@ -61,8 +59,6 @@ trait LdapLogic
         }
 
         $info = $this->searchForUser($username);
-
-        $this->unbind();
 
         if (!$info) {
             return false;
