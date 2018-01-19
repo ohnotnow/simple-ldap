@@ -12,11 +12,14 @@ class LdapUser implements \ArrayAccess
 
     protected $forenames;
 
+    protected $phone;
+
     protected $validKeys = [
         'uid' => 'username',
         'mail' => 'email',
         'sn' => 'surname',
-        'givenname' => 'forenames'
+        'givenname' => 'forenames',
+        'telephonenumber' => 'phone',
     ];
 
     public function __construct(array $ldapAttribs)
@@ -40,6 +43,7 @@ class LdapUser implements \ArrayAccess
             'email' => $this->email,
             'surname' => $this->surname,
             'forenames' => $this->forenames,
+            'phone' => $this->phone,
         ];
     }
 

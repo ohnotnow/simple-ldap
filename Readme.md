@@ -46,6 +46,7 @@ Ohffs\Ldap\LdapUser {#739
   #email: "Jenny@example.com"
   #surname: "Smith"
   #forenames: "Jenny"
+  #phone: "012345678"
 }
 */
 print $user['email'];
@@ -59,6 +60,7 @@ print $user->toArray();
      "email" => "Jenny@example.com",
      "surname" => "Smith",
      "forenames" => "Jenny",
+     "phone" => "012345678",
 ]
 */
 ```

@@ -57,11 +57,13 @@ class LdapTest extends \Orchestra\Testbench\TestCase
         $this->assertEquals('validuser@example.com', $user->email);
         $this->assertEquals('surname', $user->surname);
         $this->assertEquals('forenames', $user->forenames);
+        $this->assertEquals('phone', $user->phone);
 
         $this->assertEquals('validuser', $user['username']);
         $this->assertEquals('validuser@example.com', $user['email']);
         $this->assertEquals('surname', $user['surname']);
         $this->assertEquals('forenames', $user['forenames']);
+        $this->assertEquals('phone', $user['phone']);
     }
 
     /** @test */
@@ -83,6 +85,7 @@ class LdapTest extends \Orchestra\Testbench\TestCase
                 'mail' => [0 => 'validuser@example.com'],
                 'sn' => [0 => 'surname'],
                 'givenname' => [0 => 'forenames'],
+                'telephonenumber' => [0 => 'phone'],
             ],
         ]);
 
@@ -93,6 +96,7 @@ class LdapTest extends \Orchestra\Testbench\TestCase
         $this->assertEquals('validuser@example.com', $array['email']);
         $this->assertEquals('surname', $array['surname']);
         $this->assertEquals('forenames', $array['forenames']);
+        $this->assertEquals('phone', $array['phone']);
     }
 
     // public function test_can_use_the_facade_to_authenticate_a_user()

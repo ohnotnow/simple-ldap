@@ -64,6 +64,7 @@ class FakeLdapConnection implements LdapConnectionInterface
                     'mail' => [0 => 'validuser@example.com'],
                     'sn' => [0 => 'surname'],
                     'givenname' => [0 => 'forenames'],
+                    'telephonenumber' => [0 => 'phone'],
                 ],
             ];
         }
