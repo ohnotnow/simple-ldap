@@ -9,10 +9,8 @@ probably quite limited. But it might be useful as a basis for your own setup.
 
 ## Installation
 
-Still in development, so for now :
-
 ```
-composer require ohffs/simple-laravel-ldap "dev-master"
+composer require ohffs/simple-laravel-ldap 
 ```
 
 I'm assuming this is for Laravel 5.5+ so it should auto-discover the service providers.  You can
