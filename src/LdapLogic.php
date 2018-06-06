@@ -8,18 +8,24 @@ trait LdapLogic
 
     protected $ou;
 
-    public function __construct(string $server, string $ou)
+    public function __construct(string $server, string $ou, string $username = null, string $password = null)
     {
         $this->ldap = $this->connect($server);
-        if (! $this->ldap) {
+        if (!$this->ldap) {
             throw new LdapException('Could not connect to server');
         }
 
-        if (! $this->startTls()) {
+        if (!$this->startTls()) {
             throw new LdapException("Could not start TLS on ldap binding");
         }
 
-        if (!$this->anonymousBind()) {
+        if ($username) {
+            $result = $this->authenticate($username, $password);
+        } else {
+            $result = $this->anonymousBind();
+        }
+
+        if (!$result) {
             throw new LdapException('Could not bind to server');
         }
 
@@ -28,7 +34,7 @@ trait LdapLogic
 
     public function authenticate(string $username, string $password)
     {
-        if (! $this->ldap) {
+        if (!$this->ldap) {
             throw new LdapException('Not connected to ldap server');
         }
 
@@ -54,7 +60,7 @@ trait LdapLogic
         }
 
         $username = trim(strtolower($username));
-        if (! $username) {
+        if (!$username) {
             return false;
         }
 

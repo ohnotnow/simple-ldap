@@ -15,7 +15,9 @@ class LdapConnectionProvider extends ServiceProvider
         $this->app->bind(LdapConnectionInterface::class, function ($app) {
             return new LdapConnection(
                 config('ldap.server'),
-                config('ldap.ou')
+                config('ldap.ou'),
+                config('ldap.username', null),
+                config('ldap.password', null)
             );
         });
     }
