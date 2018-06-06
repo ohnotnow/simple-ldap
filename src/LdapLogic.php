@@ -20,7 +20,7 @@ trait LdapLogic
         }
 
         if ($username) {
-            $result = $this->authenticatedBind($username, $password);
+            $result = $this->authenticatedBind("uid={$username}", $password);
         } else {
             $result = $this->anonymousBind();
         }
@@ -46,7 +46,7 @@ trait LdapLogic
             return false;
         }
 
-        if (!$this->authenticatedBind("uid={$username}", $password)) {
+        if (!$this->authenticatedBind($username, $password)) {
             return false;
         }
 
