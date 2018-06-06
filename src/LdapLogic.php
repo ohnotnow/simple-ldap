@@ -46,6 +46,8 @@ trait LdapLogic
             return false;
         }
 
+        $user = $this->searchForUser($username);
+        dd($user);
         if (!$this->authenticatedBind($username, $password)) {
             return false;
         }

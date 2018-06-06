@@ -48,7 +48,7 @@ class LdapConnection implements LdapConnectionInterface
             Log::error("Could not find {$username} in LDAP");
             return false;
         }
-        dd(ldap_get_entries($this->ldap, $search));
+
         return ldap_get_entries($this->ldap, $search);
     }
 }
