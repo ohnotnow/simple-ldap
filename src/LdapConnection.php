@@ -38,10 +38,6 @@ class LdapConnection implements LdapConnectionInterface
             throw new LdapException('Not connected to LDAP');
         }
 
-        // $info = $this->searchForUser($username);
-        // if (!$info) {
-        //     return false;
-        // }
         return @ldap_bind($this->ldap, $username, $password);
     }
 
