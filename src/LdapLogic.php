@@ -47,8 +47,10 @@ trait LdapLogic
         }
 
         $user = $this->searchForUser($username);
-        dd($user);
-        if (!$this->authenticatedBind($username, $password)) {
+        if (!$user) {
+            return false;
+        }
+        if (!$this->authenticatedBind($user[0]['dn'], $password)) {
             return false;
         }
 
