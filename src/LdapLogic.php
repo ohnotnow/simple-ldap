@@ -10,6 +10,7 @@ trait LdapLogic
 
     public function __construct(string $server, string $ou, string $username = null, string $password = null)
     {
+        dd($username, $password);
         $this->ldap = $this->connect($server);
         if (!$this->ldap) {
             throw new LdapException('Could not connect to server');

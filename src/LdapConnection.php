@@ -42,7 +42,7 @@ class LdapConnection implements LdapConnectionInterface
         // if (!$info) {
         //     return false;
         // }
-
+        dd($username, $password);
         return @ldap_bind($this->ldap, $username, $password);
     }
 
