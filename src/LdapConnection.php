@@ -51,4 +51,15 @@ class LdapConnection implements LdapConnectionInterface
 
         return ldap_get_entries($this->ldap, $search);
     }
+
+    protected function searchForUserByEmail($emailAddress)
+    {
+        $search = ldap_search($this->ldap, $this->ou, "mail={$emailAddress}");
+        if (ldap_count_entries($this->ldap, $search) != 1) {
+            Log::error("Could not find {$emailAddress} in LDAP");
+            return false;
+        }
+
+        return ldap_get_entries($this->ldap, $search);
+    }
 }
