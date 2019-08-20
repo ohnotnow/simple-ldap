@@ -26,6 +26,6 @@ class LdapService
 
     public function findUserByEmail(string $email)
     {
-        return $this->connection->searchForUserByEmail($email);
+        return $this->connection->findUserByEmail($email);
     }
 }
