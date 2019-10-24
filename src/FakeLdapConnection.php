@@ -61,6 +61,7 @@ class FakeLdapConnection implements LdapConnectionInterface
             return [
                 0 => [
                     'uid' => [0 => 'validuser'],
+                    'dn' => [0 => 'validuser'],
                     'mail' => [0 => 'validuser@example.com'],
                     'sn' => [0 => 'surname'],
                     'givenname' => [0 => 'forenames'],
