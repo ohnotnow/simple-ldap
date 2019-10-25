@@ -77,4 +77,24 @@ trait LdapLogic
 
         return new LdapUser($info);
     }
+
+    public function findUserByEmail(string $email)
+    {
+        if (!$this->ldap) {
+            throw new LdapException('Not connected to ldap server');
+        }
+
+        $email = trim(strtolower($email));
+        if (!$email) {
+            return false;
+        }
+
+        $info = $this->searchForUserByEmail($email);
+
+        if (!$info) {
+            return false;
+        }
+
+        return new LdapUser($info);
+    }
 }

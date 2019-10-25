@@ -42,7 +42,6 @@ class FakeLdapConnection implements LdapConnectionInterface
         if (!$this->ldap) {
             throw new LdapException('Not connected to LDAP');
         }
-
         $info = $this->searchForUser($username);
         if (!$info) {
             return false;
@@ -66,6 +65,7 @@ class FakeLdapConnection implements LdapConnectionInterface
                     'sn' => [0 => 'surname'],
                     'givenname' => [0 => 'forenames'],
                     'telephonenumber' => [0 => 'phone'],
+                    'dn' => [0 => 'validuser'],
                 ],
             ];
         }
