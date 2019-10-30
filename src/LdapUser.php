@@ -15,7 +15,7 @@ class LdapUser implements \ArrayAccess
     protected $phone;
 
     protected $validKeys = [
-        'dn' => 'username',
+        'uid' => 'username',
         'mail' => 'email',
         'sn' => 'surname',
         'givenname' => 'forenames',
