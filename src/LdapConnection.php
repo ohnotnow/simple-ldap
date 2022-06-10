@@ -72,9 +72,8 @@ class LdapConnection implements LdapConnectionInterface
 
         $ldapResults = ldap_list($this->ldap, $this->ou, $query, [], 0, 0, 300);
 
-        if (! $ldapResults) {
             var_dump($ldapResults);
-            var_dump('ththth');
+        if (! $ldapResults) {
             return false;
         }
 
