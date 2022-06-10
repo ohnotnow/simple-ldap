@@ -116,10 +116,11 @@ trait LdapLogic
         }
 
         $ldapUsers = [];
-        var_dump($info);
         foreach ($info as $ldapEntry) {
-            var_dump($ldapEntry);
-            $ldapUsers[] = new LdapUser($ldapEntry);
+            if (!is_array($ldapEntry)) {
+                continue;
+            }
+            $ldapUsers[] = new LdapUser([0 => $ldapEntry]);
         }
 
         return $ldapUsers;
