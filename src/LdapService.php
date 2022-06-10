@@ -31,6 +31,6 @@ class LdapService
 
     public function searchForUsers(string $term)
     {
-        return $this->connection->search($term);
+        return $this->connection->searchForUsers($term);
     }
 }
