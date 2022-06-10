@@ -72,8 +72,12 @@ class LdapConnection implements LdapConnectionInterface
 
         $ldapResults = ldap_list($this->ldap, $this->ou, $query, [], 0, 0, 300);
 
-            var_dump($ldapResults);
         if (! $ldapResults) {
+            return false;
+        }
+
+        if (ldap_count_entries($this->ldap, $ldapResults) == 0) {
+            Log::error("Could not find {$term} in LDAP");
             return false;
         }
 
