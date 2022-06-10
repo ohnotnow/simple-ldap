@@ -62,4 +62,25 @@ class LdapConnection implements LdapConnectionInterface
 
         return ldap_get_entries($this->ldap, $search);
     }
+
+    protected function search($term)
+    {
+        $query = "(sn=*$term*)";
+        if (preg_match('/[0-9]/', $term)) {
+            $query = "(cn=*$term*)";
+        }
+
+        $ldapResults = ldap_search($this->ldap, $this->ou, $query);
+
+        if (! $ldapResults) {
+            return false;
+        }
+
+        if (ldap_count_entries($this->ldap, $ldapResults) == 0) {
+            Log::error("Could not find {$term} in LDAP");
+            return false;
+        }
+
+        return ldap_get_entries($this->ldap, $ldapResults);
+    }
 }

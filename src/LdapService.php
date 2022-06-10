@@ -28,4 +28,9 @@ class LdapService
     {
         return $this->connection->findUserByEmail($email);
     }
+
+    public function searchForUsers(string $term)
+    {
+        return $this->connection->searchForUsers($term);
+    }
 }

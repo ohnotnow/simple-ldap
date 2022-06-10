@@ -47,24 +47,24 @@ class LdapUser implements \ArrayAccess
         ];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (in_array($offset, array_values($this->validKeys))) {
             $this->$offset = $value;
         }
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return in_array($offset, array_values($this->validKeys));
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->$offset = null;
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->$offset;
     }
