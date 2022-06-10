@@ -70,10 +70,11 @@ class LdapConnection implements LdapConnectionInterface
             $query = "(cn=*$term*)";
         }
 
-        var_dump($query);
         $ldapResults = ldap_list($this->ldap, $this->ou, $query, [], 0, 0, 300);
 
         if (! $ldapResults) {
+            var_dump($ldapResults);
+            var_dump('ththth');
             return false;
         }
 
