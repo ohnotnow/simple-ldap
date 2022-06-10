@@ -64,7 +64,7 @@ class LdapUser implements \ArrayAccess
         $this->$offset = null;
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->$offset;
     }
