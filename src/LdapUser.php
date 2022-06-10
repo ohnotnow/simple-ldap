@@ -14,6 +14,8 @@ class LdapUser implements \ArrayAccess
 
     protected $phone;
 
+    protected $costCentre;
+
     protected $validKeys = [
         'uid' => 'username',
         'mail' => 'email',
@@ -22,9 +24,18 @@ class LdapUser implements \ArrayAccess
         'telephonenumber' => 'phone',
     ];
 
+    protected $extraKeys = [
+        'costcenterdescription' => 'costCentre',
+    ];
+
     public function __construct(array $ldapAttribs)
     {
         foreach ($this->validKeys as $key => $property) {
+            if (array_key_exists($key, $ldapAttribs[0])) {
+                $this->$property = $ldapAttribs[0][$key][0];
+            }
+        }
+        foreach ($this->extraKeys as $key => $property) {
             if (array_key_exists($key, $ldapAttribs[0])) {
                 $this->$property = $ldapAttribs[0][$key][0];
             }
