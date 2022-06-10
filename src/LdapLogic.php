@@ -97,4 +97,29 @@ trait LdapLogic
 
         return new LdapUser($info);
     }
+
+    public function searchForUsers(string $term)
+    {
+        if (!$this->ldap) {
+            throw new LdapException('Not connected to ldap server');
+        }
+
+        $term = trim(strtolower($term));
+        if (!$term) {
+            return false;
+        }
+
+        $info = $this->search($term);
+
+        if (!$info) {
+            return false;
+        }
+
+        $ldapUsers = [];
+        foreach ($info as $ldapEntry) {
+            $ldapUsers[] = new LdapUser($ldapEntry);
+        }
+
+        return $ldapUsers;
+    }
 }

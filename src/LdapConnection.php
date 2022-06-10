@@ -66,7 +66,7 @@ class LdapConnection implements LdapConnectionInterface
     protected function search($term)
     {
         $query = "(sn=*$term*)";
-        if (preg_match('/[0-9]/', $term) {
+        if (preg_match('/[0-9]/', $term)) {
             $query = "(cn=*$term*)";
         }
 
